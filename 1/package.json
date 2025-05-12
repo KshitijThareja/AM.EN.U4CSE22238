@@ -1,0 +1,26 @@
+{
+  "name": "stock-api",
+  "version": "1.0.0",
+  "description": "Afford full-stack role, Task-1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KshitijThareja/AM.EN.U4CSE22238.git"
+  },
+  "author": "Kshitij Thareja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KshitijThareja/AM.EN.U4CSE22238/issues"
+  },
+  "homepage": "https://github.com/KshitijThareja/AM.EN.U4CSE22238#readme",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}
