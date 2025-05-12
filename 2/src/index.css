@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#tooltip {
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}

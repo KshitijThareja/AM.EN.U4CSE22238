@@ -4,7 +4,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -30,7 +30,9 @@ async function token_valid() {
     }
 
     try {
-        const response = await axios.post(`${BASE_URL}/auth`, AUTH_CONFIG);
+        const response = await axios.post(`${BASE_URL}/auth`, AUTH_CONFIG, {
+            timeout: 10000
+        });
         accessToken = response.data.access_token;
 
         expiresIn = Date.now() + (response.data.expires_in * 1000) - (5 * 60 * 1000); // Keeping some buffer time
@@ -51,13 +53,34 @@ async function fetchPrices(ticker, minutes) {
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                timeout: 10000
             }
         );
         return response.data;
     } catch (error) {
-        console.error(`Error fetching stock prices for ${ticker}:`,
-            error);
+        if (error.response && error.response.status === 401) {
+            accessToken = null;
+            tokenExpiration = null;
+
+            try {
+                const token = await getValidToken();
+                const response = await axios.get(
+                    `${BASE_URL}/stocks/${ticker}?minutes=${minutes}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        timeout: 10000
+                    }
+                );
+                return response.data;
+            } catch (retryError) {
+                console.error(`Error fetching stock prices for ${ticker} after retry:`, retryError);
+                throw retryError;
+            }
+        }
+
+        console.error(`Error fetching stock prices for ${ticker}:`, error);
         throw error;
     }
 }
