@@ -5,7 +5,7 @@ This is a full-stack web application for analyzing stock prices and their correl
 
 ## Project Structure
 ```
-stock-price-aggregation/
+AM.EN.U4CSE22238/
 ├── 1/
 │   ├── index.js              # Express server with stock price and correlation APIs
 │   ├── package.json          # Backend dependencies and scripts
