@@ -13,7 +13,7 @@ import {
     Tooltip
 } from '@mui/material';
 
-// Uncomment the following line to use the stock data from the server
+// Stock data
 const AVAILABLE_STOCKS = {
     'AMD': 'Advanced Micro Devices, Inc.',
     'GOOGL': 'Alphabet Inc. Class A',
@@ -122,6 +122,16 @@ function CorrelationHeatmap() {
         return Math.sqrt(variance);
     };
 
+    const legendData = [
+        { value: -1.0, color: '#8B0000', label: 'Strong Negative (-1.0 to -0.5)' },
+        { value: -0.3, color: '#FF4500', label: 'Moderate Negative (-0.5 to -0.3)' },
+        { value: -0.1, color: '#FF6347', label: 'Weak Negative (-0.3 to -0.1)' },
+        { value: 0.0, color: '#FFFFFF', label: 'No Correlation (-0.1 to 0.1)' },
+        { value: 0.3, color: '#90EE90', label: 'Weak Positive (0.1 to 0.3)' },
+        { value: 0.5, color: '#3CB371', label: 'Moderate Positive (0.3 to 0.5)' },
+        { value: 1.0, color: '#006400', label: 'Strong Positive (0.5 to 1.0)' }
+    ];
+
     return (
         <Box sx={{ width: '100%', typography: 'body1' }}>
             <Typography variant="h4" gutterBottom>
@@ -226,6 +236,28 @@ function CorrelationHeatmap() {
                                     })}
                                 </React.Fragment>
                             ))}
+                        </Box>
+
+                        {/* Color Legend */}
+                        <Box sx={{ marginTop: 4 }}>
+                            <Typography variant="h6" gutterBottom>
+                                Correlation Color Legend
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                {legendData.map(({ value, color, label }) => (
+                                    <Box key={value} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                        <Box
+                                            sx={{
+                                                width: '30px',
+                                                height: '30px',
+                                                backgroundColor: color,
+                                                border: '1px solid #e0e0e0'
+                                            }}
+                                        />
+                                        <Typography>{label}</Typography>
+                                    </Box>
+                                ))}
+                            </Box>
                         </Box>
                     </CardContent>
                 </Card>
