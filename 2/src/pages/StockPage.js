@@ -36,6 +36,8 @@ const AVAILABLE_STOCKS = {
     'V': 'Visa Inc.'
 };
 
+const values = Object.values(AVAILABLE_STOCKS)
+
 const TIME_INTERVALS = [10, 30, 50, 70, 90];
 
 function StockPage() {

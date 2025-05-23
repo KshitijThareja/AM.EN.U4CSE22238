@@ -1,0 +1,26 @@
+<html>
+    <title>Calendar Webapp</title>
+    <link rel="./index.css" type="stylesheet">
+    <body>
+        <div>
+            <h3>Age Calculator</h3>
+            <div>
+                <input id="datecomp" type="date" />
+                <div>
+                    <button  id = "sub" onsubmit={handleSubmit} type="submit">Calculate Age</button>
+                </div>
+                <p id="res">Answer: </p>
+            </div>
+        </div>
+    </body>
+    <script>
+        const dob = document.getElementById('datecomp');
+        const curr_date = new Date();
+        var years = curr_date.getFullYear() - dob.nodeValue().getFullYear();
+        var months = curr_date.getMonth() - dob.nodeValue().getMonth();
+        var days = curr_date.getDay() - dob.nodeValue().getDay();
+        const result = "Your age is" + years + "years, " + months + "months" + days + "days"
+
+        document.getElementById("res").innerText(result);
+    </script>
+</html>
